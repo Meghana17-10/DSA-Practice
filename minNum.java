@@ -1,3 +1,4 @@
+//remove one digit to get minimum number from the whole digit
 import java.util.*;
 class minNum{
  public static void main(String args[]){
