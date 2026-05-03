@@ -1,0 +1,499 @@
+1 What is the output of the following code?
+1: abstract class Reptile {
+2: public final void layEggs() { System.out.println("Reptile laying eggs");
+}
+3: public static void main(String[] args) {
+4:    Reptile reptile = new Lizard();
+5:    reptile.layEggs();
+6:   }
+7: }
+8: public class Lizard extends Reptile {
+9: public void layEggs() { System.out.println("Lizard laying eggs"); }
+10: }
+
+
+A. Reptile laying eggs
+B. Lizard laying eggs
+C. The code will not compile because of line 4.
+D. The code will not compile because of line 5.
+E. The code will not compile because of line 9.
+
+
+
+
+
+
+
+ans- e
+Cannot override the final method from Reptile
+changes
+1) comment LayEggs in parent and check
+2) Change reference and check left side and right side
+
+
+
+2.
+What is the result of the following code?
+
+1: public abstract class Bird {
+2: private void fly() { System.out.println("Bird is flying"); }
+3: public static void main(String[] args) {
+4:   Bird bird = new Pelican();
+5:   bird.fly();
+6: }
+7: }
+8: class Pelican extends Bird {
+9:    protected void fly() { System.out.println("Pelican is flying"); }
+10: }
+A. Bird is flying
+B. Pelican is flying
+C. The code will not compile because of line 4.
+D. The code will not compile because of line 5.
+E. The code will not compile because of line 9.
+
+
+
+
+ans-a
+fly() is private in Bird class
+Private methods are NOT inherited
+They cannot be overridden
+
+protected void fly() { System.out.println("Pelican is flying"); }
+This is NOT overriding, child class not even know about fly() in Bird.
+because fly() declared as private in Bird
+
+
+
+
+
+3)
+3. public class Tenor extends Singer {
+4. public static String sing() { return "fa"; }
+5. public static void main(String[] args) {
+6.	Tenor t = new Tenor();
+7.	Singer s = new Tenor();
+8.	System.out.println(t.sing() + " " + s.sing());
+9. }
+10. }
+11.  class Singer { public static String sing() { return "la"; } }
+
+What is the result?
+A. fa fa
+B. fa la
+C. la la
+D. Compilation fails
+E. An exception is thrown at runtime
+
+
+
+
+
+Answer:
+B is correct.
+Static methods are hidden, not overridden.
+Method call is resolved using the reference type(in static), not the object type.
+
+
+
+4)
+3. class Mammal {
+4. String name = "furry ";
+5. String makeNoise() { return "generic noise"; }
+6. }
+7. class Zebra extends Mammal {
+8. String name = "stripes ";
+9. String makeNoise() { return "bray"; }
+10. }
+11. public class ZooKeeper {
+12. public static void main(String[] args) { new ZooKeeper().go(); }
+13. void go() {
+14. Mammal m = new Zebra();
+15. System.out.println(m.name + m.makeNoise());
+16. }
+17. }
+What is the result?
+A. furry bray
+B. stripes bray
+C. furry generic noise
+D. stripes generic noise
+E. Compilation fails
+F. An exception is thrown at runtime
+
+
+
+
+
+Answer:
+A is correct. Polymorphism is only for instance methods.
+Fields do NOT support polymorphism
+
+Reference type = Mammal
+So: m.name → Mammal.name → "furry "
+
+Instance methods
+String makeNoise() { return "bray"; }
+
+Methods support polymorphism
+Method call is decided by object type
+
+Object type = Zebra
+
+So: m.makeNoise() → Zebra.makeNoise() → "bray"
+
+
+5)
+class A{
+	{ System.out.print(1+" "); }
+	A(){  System.out.print(2+" "); }
+	static {	System.out.print(3+" "); }
+}
+
+class B extends A{
+	{ System.out.print(4+" "); }
+	B(){  System.out.print(5+" "); }
+	static {	System.out.print(6+" "); }
+}
+class Test{
+	public static void main(String[] args){
+	B b=new B();
+	System.out.print(7);
+	}
+}
+a)1 2 4 5 3 6 7
+b)3 6 1 2 4 5 7
+c)3 6 1 4 2 5 7
+d)1 2 3 4 5 6 7 
+e)4 5 6 1 2 3 7
+f)3 6 7 1 4 2 5
+g) compilation fails
+h) none of these
+
+
+
+
+
+
+
+
+
+Ans: B
+
+Rules You MUST Remember (Very Important)
+Static blocks
+Execute once
+Execute when the class is loaded
+Parent class static blocks run before child class static blocks
+
+Object creation order
+When you do new B():
+Parent class instance blocks
+Parent class constructor
+Child class instance blocks
+Child class constructor
+
+
+
+6)
+class A {
+	int x=10;
+	}
+class B  extends A{
+     	B(){   
+		System.out.print(super.x+" ");       //Line-7
+		System.out.print(this.x);        //Line-8
+			}
+		public static void main(String[] args) {
+         B b= new B();
+		 }
+ }
+
+a) 10 10
+b) 0 0
+c) 10 0
+d) 10 followed by runtime exception
+f) compilation fails at Line-7
+g) compilation fails at Line-8
+h) none of these
+
+
+
+
+
+
+
+
+Ans: A
+super() --> it will call parent class constructor
+this(10) --> it will call current class constructor
+
+super.x --> it will access parent class variable x
+this.x --> it will access current class variable x
+
+super.m1()  --> it will access parent class method m1()
+this.m1()  --> it will access current class method m1()
+
+
+
+
+7)
+class Parent {
+	private  static int  add(int x, final int y){  return 10;  }  //Line-2
+}
+
+class Test extends Parent {
+	public  static int  add(int x,  int y){  return 20;  }  //Line-6
+
+	 public static void main(String[] args) {
+          int x=30;
+	  int y=40;
+	  System.out.println( add(x,y) );                        //Line-10
+ 	 }
+ }
+ 
+ a) 10
+ b) 20
+ c) 70
+ d) compilation fails at Line-2
+ e) compilation fails at Line-6
+ f) compilation fails at Line-10
+g)  None of these
+
+
+
+
+
+
+ Ans: B
+
+
+
+8)
+class Parent {
+    private final int add(int x, int y){  return 1; }             //Line-2
+}
+class Child extends Parent {                               //line-4
+	final int add(int x, int y){  return 2; }            //Line-5
+
+ public static void main(String[] args){
+	  Child c=new Child();
+	  System.out.println(c.add(10,20));                         
+ 	 }
+ }
+
+a) 1
+b) 2
+c) compilation fails at line-2
+d) compilation fails at line-4
+e) compilation fails at line-5
+f) none of these
+
+
+
+
+
+
+
+
+Ans: B
+
+
+9)
+class Atom {
+   Atom() { System.out.print("atom "); }
+ }
+ class Rock extends Atom {
+   Rock(String type) { System.out.print(type); }
+ }
+ class Mountain extends Rock {
+    Mountain() {
+      super("granite ");
+      new Rock("granite ");
+   }
+ public static void main(String[] a) { new Mountain(); }
+ }
+
+
+What is the result?
+A. Compilation fails.
+B. atom granite
+C. granite granite
+D. atom granite granite
+E. An exception is thrown at runtime.
+F. atom granite atom granite
+
+
+
+
+
+Answer: F
+
+
+
+10)
+class Test {
+    void show(long a) {
+        System.out.print("long ");
+    }
+    void show(Integer a) {
+        System.out.print("Integer ");
+    }
+
+    public static void main(String[] args) {
+        new Test().show(10);
+    }
+}
+
+What is the output?
+
+A. long
+B. Integer
+C. Compilation fails
+D. Runtime exception
+
+
+
+
+
+
+
+
+Ans: A
+
+Reason:
+Method selection priority → widening > autoboxing
+
+
+11)
+class Counter {
+    static int count = 0;
+    Counter() { count++; }
+}
+public class Test {
+    public static void main(String[] args) {
+        new Counter();
+        new Counter();
+        System.out.print(Counter.count);
+    }
+}
+
+A. 0
+B. 1
+C. 2
+D. Compilation fails
+
+
+
+Answer: C
+Reason: Static variable is shared across all objects.
+
+
+12)
+class Box {
+    int size;
+}
+class Test {
+    static void swap(Box a, Box b) {
+        Box temp = a;
+        a = b;
+        b = temp;
+    }
+    public static void main(String[] args) {
+        Box x = new Box();
+        Box y = new Box();
+        x.size = 10;
+        y.size = 20;
+        swap(x, y);
+        System.out.print(x.size + " " + y.size);
+    }
+}
+
+Output?
+
+A. 20 10
+B. 10 20
+C. 0 0
+D. Compilation fails
+
+
+
+
+
+Answer:  B
+Reason: Java passes copy of references → swap fails.
+
+13)
+class A {
+    static void show() {
+        System.out.print("A ");
+    }
+}
+class B extends A {
+    static void show() {
+        System.out.print("B ");
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        A obj = new B();
+        obj.show();
+    }
+}
+
+
+Output?
+
+A. A
+B. B
+C. Compilation fails
+D. Runtime exception
+
+ Answer: A
+
+Reason:
+Static methods → compile-time binding
+Reference type = A
+
+
+14)
+class A {
+    static void m() { System.out.print("static "); }
+    void m(int x) { System.out.print("instance "); }
+}
+public class Test {
+    public static void main(String[] args) {
+        new A().m(5);
+    }
+}
+
+A. static
+B. instance
+C. Compilation fails
+D. Runtime exception
+
+
+
+ Answer: B
+
+15)
+
+class A {
+    private static void m() { System.out.print("A "); }
+    static void call() { m(); }
+}
+class B extends A {
+    private static void m() { System.out.print("B "); }
+}
+public class Test {
+    public static void main(String[] args) {
+        B.call();
+    }
+}
+
+
+A. A
+B. B
+C. Compilation fails
+D. Runtime exception
+
+ Answer: A
