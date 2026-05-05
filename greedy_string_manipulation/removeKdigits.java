@@ -1,4 +1,8 @@
-import java.util.*;
+//4. Remove K digits to maximize number Given N and integer K, remove K digits to get the largest possible number. 
+// Example: N = 1432219, K = 3 → 4329
+
+//for continuous deletion 
+/*import java.util.*;
 class removeKdigits{
  public static void main(String[] args){
   Scanner sc = new Scanner(System.in);
@@ -17,4 +21,37 @@ class removeKdigits{
   }
   System.out.println(best);
  }
+}*/
+
+//for scattered/arbitrary deletion
+import java.util.*;
+class removeKdigits{
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    String str = sc.next();
+    int k = sc.nextInt();
+    Stack<Character> s  = new Stack<>();
+
+    for(int i=0;i<str.length();i++){
+     char c = str.charAt(i);
+     
+      while(!s.isEmpty() && k>0){
+       if(s.peek() < c){
+        s.pop();
+        k--;
+      }else break;
+     }
+
+     s.push(c);
+    }
+    while(k>0 && !s.isEmpty()){
+     s.pop();
+     k--;
+    }
+
+    StringBuilder sb = new StringBuilder();
+    for(char c: s) sb.append(c);
+    System.out.println(sb.toString());
+    
+  }
 }
