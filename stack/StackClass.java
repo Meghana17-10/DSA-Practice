@@ -1,7 +1,7 @@
 //stack bulding using linked list.
 // node->head
 
-class StackClass {
+/*class StackClass {
 
     // Node class (building block of linked list)
     static class Node {
@@ -64,4 +64,43 @@ class StackClass {
             s.pop();
         }
     }
+}*/
+
+
+//stack built using arraylist
+import java.util.*;
+
+class StackClass {
+  static class Stack {
+    ArrayList<Integer> list = new ArrayList<>();
+     boolean isEmpty(){
+      if(list.size()==0) return true;
+      return false;
+    }
+    void push(int data){
+      list.add(data);      
+    }
+    int pop(){
+      if(isEmpty()) return -1;
+      int top= list.get(list.size()-1);
+      list.remove(list.size()-1);
+      return top;
+    }
+    int peek(){
+      if(isEmpty()) return -1;
+      return list.get(list.size()-1);
+    }
+  
+  }
+      
+  public static void main(String[] args){
+    Stack s = new Stack();
+    s.push(3);
+    s.push(5);
+    s.push(7);
+    while(!s.isEmpty()){
+      System.out.println(s.peek());
+      s.pop();
+    }
+ }
 }
