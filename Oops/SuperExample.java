@@ -1,10 +1,10 @@
-class A{
+class A{ //extends object() {
  A() {
- super(); //bydefault
+ super(); //parent class super calls object constructor.
  System.out.println("A");
  }
  A(int n) {
- super();  //bydefault
+ super();  
  System.out.println("int A");
  }
 }
@@ -15,13 +15,13 @@ class B extends A {
  }
  B(int b) { 
   //super();  //bydefault
-  super (b);
+  super (b); //if want to pass parameterized explictly mention it. otherwise it is default
   System.out.println("int B");
  }
 }
 public class SuperExample {
  public static void main(String[] args){
   B obj = new B(); //op will be A B because first prints parent class then child class.
-  B obj1 = new B(5); //op will be A int B, because there will be super() method automatically in every constructor. it is default so it calls default constructor
+  B obj1 = new B(5); //op will be A int B, because there will be super() method automatically in every constructor. it is default so it calls default constructor from parent class.
  }
 }
