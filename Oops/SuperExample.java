@@ -1,4 +1,4 @@
-class A{ //extends object() {
+class A{ //every class extends object even if we dont mention. 
  A() {
  super(); //parent class super calls object constructor.
  System.out.println("A");
