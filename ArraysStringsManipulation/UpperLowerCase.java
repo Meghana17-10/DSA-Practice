@@ -15,7 +15,6 @@ class UpperLowerCase{
         char[] arr = str.toCharArray();
         if(Character.isLowerCase(arr[0])) str = str.toLowerCase();
         if(Character.isUpperCase(arr[0])) str = str.toUpperCase();
-        
         System.out.print(str);
     }
 }
